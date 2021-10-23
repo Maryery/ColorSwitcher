@@ -21,15 +21,24 @@ const btn = document.getElementById('btn')!;
 const color = document.querySelector('.color')!;
 
 btn.addEventListener('click', function () {
+	generateColor((x) =>{
+		color.textContent = x;
+		document.body.style.backgroundColor = x;
+	})
+
+	
+});
+
+function generateColor(update:(color:string) => void)
+{
 	let hexColor: string = '#';
-	for (let i = 0; i < 6; i++) {
+	for (let i = 0; i < 6; i++) 
+	{
 		console.log(getRandomNumber());
 		hexColor += hexValues[getRandomNumber()];
 	}
-
-	color.textContent = hexColor;
-	document.body.style.backgroundColor = hexColor;
-});
+	update(hexColor);
+}
 
 function getRandomNumber() {
 	return Math.floor(Math.random() * hexValues.length);
